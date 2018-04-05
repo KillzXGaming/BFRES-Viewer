@@ -1,0 +1,52 @@
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.csprojResolveAssemblyReference.cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.Form1.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.Properties.Resources.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.csproj.GenerateResource.Cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\bin\Debug\BFRES.exe.config
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\bin\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\bin\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\bin\Debug\OpenTK.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master\BFRES\BFRES\obj\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\bin\Debug\BFRES.exe.config
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\bin\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\bin\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\bin\Debug\OpenTK.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.csprojResolveAssemblyReference.cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.Form1.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.Properties.Resources.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.csproj.GenerateResource.Cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES\BFRES\obj\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\bin\Debug\BFRES.exe.config
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\bin\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\bin\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\bin\Debug\OpenTK.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.csprojResolveAssemblyReference.cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.Form1.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.Properties.Resources.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.csproj.GenerateResource.Cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\BFRES - Copy (2)\BFRES\obj\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\BFRES.exe.config
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\OpenTK.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.csprojResolveAssemblyReference.cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.Form1.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.Properties.Resources.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.csproj.GenerateResource.Cache
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.exe
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.pdb
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.BinaryData.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.Maths.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.NintenTools.Bfres.dll
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.BinaryData.xml
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.Maths.xml
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\bin\Debug\Syroot.NintenTools.Bfres.xml
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.ShaderSettingsWindow.resources
+C:\Users\Nathan\Desktop\Tools\ModelThingy-master - Copy\Switch FSKA\BFRES\obj\Debug\BFRES.Settings.resources
