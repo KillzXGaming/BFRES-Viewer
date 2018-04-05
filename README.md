@@ -18,3 +18,4 @@ For now this useful for viewing and ripping data when more features are added in
 * Ploaj for original tool and animation interpolation stuff. 
 * Smb123w64gb which made imrpovements to the original tool. 
 * RandomTalkingBush for his script that gave an idea on the layout that changed for the fromat
+* Aboood40091 & GDKchan for swizzle code. (Not implimented fully yet)
