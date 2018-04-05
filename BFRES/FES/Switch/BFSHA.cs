@@ -20,6 +20,8 @@ namespace BFRES
             set;
         }
 
+        //Any BFSHA data is optained by Ray's 010 Template from Wii U. Not too much has changed atleast from the first area of the bfsha but more research neeeds to be looked into.
+
 
         public BFSHA(FileData f)
         {
