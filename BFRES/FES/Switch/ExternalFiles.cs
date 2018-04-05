@@ -45,7 +45,7 @@ namespace BFRES
             }
             if (EmMagic.Equals("FSHA")) //Shader
             {
-                BFSHA.Add(new BFSHA(f));
+               // BFSHA.Add(new BFSHA(f));
                 Console.WriteLine("Found Shader");
             }
 
