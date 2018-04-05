@@ -283,8 +283,9 @@ namespace BFRES
 
         private void glControl1_Load(object sender, EventArgs e)
         {
-            defTex = loadImage(new Bitmap("Textures/Default.png"));
-
+ 
+                defTex = loadImage(new Bitmap(Properties.Resources.DefaultTexture));
+    
         }
 
         private void treeView1_Click(object sender, EventArgs e)
