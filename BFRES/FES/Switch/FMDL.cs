@@ -165,6 +165,7 @@ namespace BFRES
                 GL.VertexAttribPointer(BFRES.shader.getAttribute("_w0"), 4, VertexAttribPointerType.Float, false, BaseRenderData.Vertex.Stride, 48);
                 GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
+  
 
                 // bind attributes
                 //Console.WriteLine(shape.Text + " " + shape.singleBind);
@@ -509,6 +510,12 @@ namespace BFRES
                                     vert.ny = FileData.sign10Bit((normVal >> 10) & 0x3FF) / 511f;
                                     vert.nz = FileData.sign10Bit((normVal >> 20) & 0x3FF) / 511f;
                                     break;
+                                }
+                                else if (att.format.Equals(0x518))
+                                {
+                                    vert.x = d.readFloat();
+                                    vert.y = d.readFloat();
+                                    vert.z = d.readFloat();
                                 }
                                 else
                                     Console.WriteLine("Unkown Format!! " + att.format.ToString() + " " + att.Text);

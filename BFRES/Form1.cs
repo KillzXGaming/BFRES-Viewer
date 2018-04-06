@@ -284,8 +284,13 @@ namespace BFRES
         private void glControl1_Load(object sender, EventArgs e)
         {
  
-                defTex = loadImage(new Bitmap(Properties.Resources.DefaultTexture));
-    
+            defTex = loadImage(new Bitmap(Properties.Resources.DefaultTexture));
+
+            //Lighting
+         //   GL.Enable(EnableCap.Lighting);
+         //   GL.Enable(EnableCap.Light0);
+
+
         }
 
         private void treeView1_Click(object sender, EventArgs e)
@@ -335,8 +340,41 @@ namespace BFRES
                 height -= 30f;
             if (e.KeyChar == 'r')
                 lookup -= 1.5f;
-  
+            if (e.KeyChar == 'v')
+            {
+                GL.Disable(EnableCap.PolygonOffsetFill);
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                GL.Enable(EnableCap.PolygonOffsetLine);
+                GL.PolygonOffset(1, 1);
+            }
+            else
+            {
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+                GL.Enable(EnableCap.PolygonOffsetLine);
+            }
 
+            glControl1.Invalidate();
+        }
+
+
+        private void SetupCursorXYZ()
+        {
+            x = PointToClient(Cursor.Position).X * (z + 1);
+            y = (-PointToClient(Cursor.Position).Y + glControl1.Height) * (z + 1);
+        }
+
+        float x = 0f;
+        float y = 0f;
+        float z = 0f;
+
+        private void OnMouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Delta > 0 && z > 0) z -= 0.5f;
+            if (e.Delta < 0 && z < 5) z += 0.5f;
+
+            SetupCursorXYZ();
+
+            
             glControl1.Invalidate();
         }
 
@@ -396,6 +434,11 @@ namespace BFRES
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

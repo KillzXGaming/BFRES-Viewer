@@ -73,6 +73,16 @@ namespace BFRES.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BasicGray {
+            get {
+                object obj = ResourceManager.GetObject("BasicGray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bone {
             get {
                 object obj = ResourceManager.GetObject("bone", resourceCulture);
