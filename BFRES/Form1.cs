@@ -403,7 +403,7 @@ namespace BFRES
 
                 if (s.ShowDialog() == DialogResult.OK)
                 {
-                    OBJ.Export(s.FileName, mdl.Index);
+                    OBJ.Export(s.FileName, mdl.ExportModel());
                 }
             }
         }
