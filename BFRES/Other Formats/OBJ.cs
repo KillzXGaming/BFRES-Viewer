@@ -15,32 +15,24 @@ namespace BFRES
 
         }
 
-        public static void Export( string FileName, int modelIndex)
+        public static void Export( string FileName, BaseRenderData model)
         {
-            //Get shape and vertex data
-
-            Console.WriteLine("FMDL Index Selected = " + modelIndex);
-
-            BaseRenderData model = new BaseRenderData();
-
+            //Get shape and vertex data            
             using (System.IO.StreamWriter f = new System.IO.StreamWriter(FileName))
             {
 
-                Console.WriteLine("Polygon List Count = " + model.data.Count);
-
-                foreach (var shp in model.PolygonO)
+                foreach (var v in model.data)
                 {
-                    f.Write(shp.name);
-                    f.Write(shp.face);
-                    f.Write("TEST");
+                    f.WriteLine($"v {v.x} {v.y} {v.z}");
                 }
-       
-                if (model.PolygonO.Count == 0)
-                {
-                    MessageBox.Show("Object Empty???", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                var d = model.PolygonO;
+                for (int i = 0; i < d.Count; i++)
+                {
+                    f.WriteLine($"f {d[i++].face + 1} {d[i++].face + 1} {d[i].face + 1}");
                 }
+
+
             }
         }
     }
