@@ -8,9 +8,7 @@ using OpenTK;
 namespace BFRES
 {
     public class BaseRenderData
-    {
-        
-
+    {       
         public List<Vertex> data = new List<Vertex>();
         public List<shape> PolygonO = new List<shape>();
 
@@ -33,5 +31,17 @@ namespace BFRES
             public const int Stride = 4 * 16;
         }
 
+        public void Join(BaseRenderData rnd)
+        {
+            var datalen = data.Count;
+            var polyLen = PolygonO.Count;
+
+            data.AddRange(rnd.data);
+            PolygonO.AddRange(rnd.PolygonO);
+            for (int i = polyLen; i < PolygonO.Count; i++)
+            {
+                PolygonO[i].face += datalen; //offset
+            }
+        }
     }
 }

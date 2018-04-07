@@ -25,12 +25,16 @@ namespace BFRES
         List<FSHP> shapes = new List<FSHP>();
         public FSKL skel;
 
-        public BaseRenderData ExportModel(int index = 0, int LODindex = 0)
+        public BaseRenderData ExportModel(int LODindex = 0)
         {
             BaseRenderData res = new BaseRenderData();
-            var shape = shapes[index];
-            res.data = vertattr[shape.fvtxindex].VertData;
-            res.PolygonO = shape.lodModels[LODindex].shapeData;
+            foreach (var shape in shapes)
+            {
+                BaseRenderData curShape = new BaseRenderData();
+                curShape.data = vertattr[shape.fvtxindex].VertData;
+                curShape.PolygonO = shape.lodModels[LODindex].shapeData;
+                res.Join(curShape);
+            }
             return res;
         }
 
