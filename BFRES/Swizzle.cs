@@ -92,22 +92,37 @@ namespace BFRES
             ASTC12x12 = 0x3a,
         }
 
-        public enum blk_dims //Blk height/width
+        public static uint blk_dims(uint format, uint blkWidth, uint blkHeight) //Blk height/width
         {
-            dim_4x4 = 0x2d,
-            dim_5x4 = 0x2e,
-            dim_5x5 = 0x2f,
-            dim_6x5 = 0x30,
-            dim_6x6 = 0x31,
-            dim_8x5 = 0x32,
-            dim_8x6 = 0x33,
-            dim_8x8 = 0x34,
-            dim_10x5 = 0x35,
-            dim_10x6 = 0x36,
-            dim_10x8 = 0x37,
-            dim_10x10 = 0x38,
-            dim_12x10 = 0x39,
-            dim_12x12 = 0x3a,
+            if (format == 0x2d)
+                return (4 | 4);
+            else if (format == 0x2e)
+                return (5 | 4);
+            else if (format == 0x2f)
+                return (5 | 5);
+            else if (format == 0x30)
+                return (6 | 6);
+            else if (format == 0x31)
+                return (6 | 6);
+            else if (format == 0x32)
+                return (8 | 5);
+            else if (format == 0x33)
+                return (8 | 6);
+            else if (format == 0x34)
+                return (8 | 8);
+            else if (format == 0x35)
+                return (10 | 5);
+            else if (format == 0x36)
+                return (10 | 6);
+            else if (format == 0x37)
+                return (10 | 8);
+            else if (format == 0x38)
+                return (10 | 10 );
+            else if (format == 0x39)
+                return (12 | 10);
+            else
+                return (12 | 12);
+
         }
 
         public static byte[] bpps;  //Bytes per pixel
