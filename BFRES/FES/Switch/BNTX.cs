@@ -116,13 +116,13 @@ namespace BFRES
             sur.swizzle = f.readShort();
             sur.numMips = f.readShort();
             int unk2 = f.readInt();
-            sur.format = f.readInt();
+            sur.format = (uint)f.readInt();
             int unk3 = f.readInt();
             sur.width = f.readInt();
             sur.height = f.readInt();
             sur.depth = f.readInt();
             int FaceCount = f.readInt();
-            int SizeRange = f.readInt();
+            sur.sizeRange = f.readInt();
             int unk38 = f.readInt();
             int unk3C = f.readInt();
             int unk40 = f.readInt();
@@ -148,8 +148,17 @@ namespace BFRES
 
             Console.WriteLine("Texture Size = " + sur.height + " x " + sur.width);
 
-            byte[] data = Swizzle.swizzleBC(sur.data, sur.width, sur.height, sur.format);
-            tex.mipmaps.Add(data);
+            int blkWidth = 1;  //Test
+            int blkHeight = 1; //Test
+            int bpp = 1;
+
+            //int bpp = Swizzle.bpps[sur.format >> 8];
+
+
+            byte[] result = Swizzle.deswizzle(sur.width, sur.height, blkWidth, blkHeight, bpp, sur.tileMode, sur.alignment, sur.sizeRange, sur.format, sur.data, sur.swizzle);
+
+
+            tex.mipmaps.Add(result);
             tex.width = sur.width;
             tex.height = sur.height;
 

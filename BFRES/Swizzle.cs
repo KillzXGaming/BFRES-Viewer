@@ -14,7 +14,7 @@ namespace BFRES
             public int dim;
             public int depth;
             public int numMips;
-            public int format;
+            public uint format;
             public int aa;
             public int use;
             public int resourceFlags;
@@ -27,6 +27,7 @@ namespace BFRES
             public int swizzle;
             public int alignment;
             public int pitch;
+            public int sizeRange;
 
             public byte[] data;
 
@@ -109,10 +110,10 @@ namespace BFRES
             dim_12x12 = 0x3a,
         }
 
-        public enum bpps  //Bytes per pixel
-        {
-                
-        }
+        public static byte[] bpps;  //Bytes per pixel
+        
+
+        
 
         /*---------------------------------------
          * 
@@ -122,114 +123,92 @@ namespace BFRES
          * 
          *---------------------------------------*/
 
-        public static byte[] swizzleBC(byte[] data, int width, int height, int format)
+
+        public static int DIV_ROUND_UP(int n, int d)
+        {
+            return (n + d - 1) / d;
+        }
+        public static int round_up(int x, int y)
+        {
+            return ((x - 1) | (y - 1)) + 1;
+        }
+
+        public static byte[] _swizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
         {
             GX2Surface sur = new GX2Surface();
-
-            int swizzle = (format >> 8);
-
-
-            int W = (sur.width + 3) / 4;
-            int H = (sur.height + 3) / 4;
-            
-
-
             sur.width = width;
             sur.height = height;
             sur.format = format;
             sur.data = data;
             sur.imageSize = data.Length;
-            //return swizzleBC(sur);
 
-            byte[] Output = new byte[W * H * 64];
+            int block_height = 1 << size_range;
 
+            width = DIV_ROUND_UP(sur.width, blkWidth);
+            height = DIV_ROUND_UP(sur.height, blkHeight);
 
-
-            for (int Y = 0; Y < H; Y++)
-            {
-                for (int X = 0; X < W; X++)
-                {
-
-                    byte[] Tile;
-                    int TOffset = 0;
-
-
-                    for (int TY = 0; TY < 4; TY++)
-                    {
-                        for (int TX = 0; TX < 4; TX++)
-                        {
-                            int OOffset = (X * 4 + TX + (Y * 4 + TY) * W * 4) * 4;
-
-                            TOffset += 4;
-                        }
-                    }
-                }
-            }
-
-    
-
-            return swizzleSurface(sur, (SurfaceFormat)sur.format != SurfaceFormat.FORMAT_TCS_R8_G8_B8_A8_UNORM);
-        }
-
-        public static int getBPP(int i)
-        {
-            switch ((SurfaceFormat)i)
-            {
-                case SurfaceFormat.FORMAT_TCS_R8_G8_B8_A8_UNORM:
-                    return 0x20;
-                case SurfaceFormat.FORMAT_T_BC1_UNORM:
-                case SurfaceFormat.FORMAT_T_BC1_SRGB:
-                    return 0x40;
-                case SurfaceFormat.FORMAT_T_BC2_UNORM:
-                    return 0x80;
-                case SurfaceFormat.FORMAT_T_BC3_UNORM:
-                case SurfaceFormat.FORMAT_T_BC3_SRGB:
-                    return 0x80;
-                case SurfaceFormat.FORMAT_T_BC4_UNORM:
-                    return 0x40;
-                case SurfaceFormat.FORMAT_T_BC5_UNORM:
-                case SurfaceFormat.FORMAT_T_BC5_SNORM:
-                    return 0x80;
-            }
-            Console.WriteLine("UnkFormat:" + (SurfaceFormat)i);
-            return -1;
-        }
-
-        public static byte[] swizzleSurface(GX2Surface surface, bool isCompressed)
-        {
-            byte[] original = new byte[surface.data.Length];
-
-            surface.data.CopyTo(original, 0);
-
-            int swizzle = ((surface.swizzle >> 8) & 1) + (((surface.swizzle >> 9) & 3) << 1);
-            int blockSize;
-            int width = surface.width;
-            int height = surface.height;
-
-            int format = getBPP(surface.format);
-
-            if (isCompressed)
-            {
-                width /= 4;
-                height /= 4;
-
-                if ((SurfaceFormat)surface.format == SurfaceFormat.FORMAT_T_BC1_UNORM ||
-                    (SurfaceFormat)surface.format == SurfaceFormat.FORMAT_T_BC4_UNORM ||
-                    (SurfaceFormat)surface.format == SurfaceFormat.FORMAT_T_BC1_SRGB)
-                {
-                    blockSize = 8;
-                }
-                else
-                {
-                    blockSize = 16;
-                }
-            }
+            int pitch;
+            if (tileMode == 0)
+                pitch = round_up(width * bpp, alignment * 64);
             else
-            {
-                blockSize = format / 8;
-            }
+                pitch = round_up(width * bpp, 64);
 
-            return surface.data;
+            int surfSize = round_up(pitch * round_up(height, block_height * 8), alignment);
+
+            byte[] result = new byte[surfSize];
+
+            for (int y = 0; y < width; y++)
+            {
+                for (int x = 0; x < height; x++)
+                {
+                    int pos;
+                    int pos_;
+
+                    if (tileMode == 0)
+                        pos = y * pitch + x * bpp;
+
+                    else
+                        pos = getAddrBlockLinear(x, y, width, bpp, 0, block_height);
+
+                    pos_ = (y * width + x) * bpp;
+
+                }
+            }
+            return result;
+        }
+
+        public static byte[] deswizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
+        {
+            return _swizzle(width, height, blkWidth, blkHeight, bpp, tileMode, alignment, size_range, format, data, toSwizzle);
+        }
+
+        public static byte[] swizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
+        {
+            return _swizzle(width, height, blkWidth, blkHeight, bpp, tileMode, alignment, size_range, format, data, toSwizzle);
+        }
+
+   
+
+
+        static int getAddrBlockLinear(int x, int y, int width, int bytes_per_pixel, int base_address, int block_height)
+        {
+            /*
+              From Tega X1 TRM 
+                               */
+            int image_width_in_gobs = DIV_ROUND_UP(width * bytes_per_pixel, 64);
+
+
+            int GOB_address = (base_address
+                           + (y / (8 * block_height)) * 512 * block_height * image_width_in_gobs
+                           + (x * bytes_per_pixel / 64) * 512 * block_height
+                           + (y % (8 * block_height) / 8) * 512);
+
+            x *= bytes_per_pixel;
+
+            int Address = (GOB_address + ((x % 64) / 32) * 256 + ((y % 8) / 2) * 64
+               + ((x % 32) / 16) * 32 + (y % 2) * 16 + (x % 16));
+
+            return Address;
         }
     }
 }
