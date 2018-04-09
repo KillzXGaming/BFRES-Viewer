@@ -117,7 +117,7 @@ namespace BFRES
 
         /*---------------------------------------
          * 
-         * Code ported from Aboood's GTX Extractor https://github.com/aboood40091/GTX-Extractor/blob/master/gtx_extract.py
+         * Code ported from Aboood's BNTX Extractor https://github.com/aboood40091/BNTX-Extractor/blob/master/swizzle.py
          * 
          * With help by gdkchan!
          * 
