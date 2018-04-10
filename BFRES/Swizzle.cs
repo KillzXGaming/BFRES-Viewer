@@ -94,27 +94,27 @@ namespace BFRES
 
         public static uint blk_dims(uint format, int blkWidth, int blkHeight) //Blk height/width
         {
-            if (format == 0x2d) return (4 | 4);
-            else if (format == 0x1a) return (4 | 4);
-            else if (format == 0x1b) return (4 | 4);
-            else if (format == 0x1c) return (4 | 4);
-            else if (format == 0x1e) return (4 | 4);
-            else if (format == 0x1f) return (4 | 4);
-            else if (format == 0x1d) return (4 | 4);
-            else if (format == 0x20) return (4 | 4);
-            else if (format == 0x2e) return (5 | 4);
-            else if (format == 0x2f) return (5 | 5);
-            else if (format == 0x30) return (6 | 6);
-            else if (format == 0x31) return (6 | 6);
-            else if (format == 0x32) return (8 | 5);
-            else if (format == 0x33) return (8 | 6);
-            else if (format == 0x34) return (8 | 8);
-            else if (format == 0x35) return (10 | 5);
-            else if (format == 0x36) return (10 | 6);
-            else if (format == 0x37) return (10 | 8);
-            else if (format == 0x38) return (10 | 10);
-            else if (format == 0x39) return (12 | 10);
-            else if (format == 0x3a) return (12 | 12);
+            if (format == 0x2d) return (format | 4 | 4);
+            else if (format == 0x1a) return (format | 4 | 4);
+            else if (format == 0x1b) return (format | 4 | 4);
+            else if (format == 0x1c) return (format | 4 | 4);
+            else if (format == 0x1e) return (format | 4 | 4);
+            else if (format == 0x1f) return (format | 4 | 4);
+            else if (format == 0x1d) return (format | 4 | 4);
+            else if (format == 0x20) return (format | 4 | 4);
+            else if (format == 0x2e) return (format | 5 | 4);
+            else if (format == 0x2f) return (format | 5 | 5);
+            else if (format == 0x30) return (format | 6 | 6);
+            else if (format == 0x31) return (format | 6 | 6);
+            else if (format == 0x32) return (format | 8 | 5);
+            else if (format == 0x33) return (format | 8 | 6);
+            else if (format == 0x34) return (format | 8 | 8);
+            else if (format == 0x35) return (format | 10 | 5);
+            else if (format == 0x36) return (format | 10 | 6);
+            else if (format == 0x37) return (format | 10 | 8);
+            else if (format == 0x38) return (format | 10 | 10);
+            else if (format == 0x39) return (format | 12 | 10);
+            else if (format == 0x3a) return (format | 12 | 12);
             else
                 throw new Exception("Unknown format");
         }
