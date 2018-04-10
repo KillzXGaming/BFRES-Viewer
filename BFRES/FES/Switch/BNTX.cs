@@ -118,11 +118,11 @@ namespace BFRES
             int unk2 = f.readInt();
             sur.format = (uint)f.readInt();
             int unk3 = f.readInt();
-            sur.width = f.readInt();
-            sur.height = f.readInt();
+            sur.width = (uint)f.readInt();
+            sur.height = (uint)f.readInt();
             sur.depth = f.readInt();
             int FaceCount = f.readInt();
-            sur.sizeRange = f.readInt();
+            sur.sizeRange = (uint)f.readInt();
             int unk38 = f.readInt();
             int unk3C = f.readInt();
             int unk40 = f.readInt();
@@ -130,7 +130,7 @@ namespace BFRES
             int unk48 = f.readInt();
             int unk4C = f.readInt();
             int datalength = f.readInt();
-            sur.alignment = f.readInt();   
+            sur.alignment = (uint)f.readInt();   
             int ChannelType = f.readInt();
             int TextureType = f.readInt();
             Text = f.readString(f.readOffset() + ExternalFiles.DataOffset + 2, -1);
@@ -148,22 +148,18 @@ namespace BFRES
 
             Console.WriteLine("Texture Size = " + sur.height + " x " + sur.width);
 
-            int blkWidth = 1;
-            int blkHeight = 1;
-            int bpp = 1;
+            uint blk_dim = Swizzle.blk_dims(sur.format >> 8);
+            uint blkWidth = blk_dim >> 4;
+            uint blkHeight = blk_dim & 0xF;
 
-            Console.WriteLine(sur.format);
+            uint bpp = Swizzle.bpps(sur.format >> 8);
 
-
-            Swizzle.blk_dims(sur.format >> 8, blkWidth , blkHeight);
-            Swizzle.bpps(sur.format >> 8, bpp);
-
-            byte[] result = Swizzle.deswizzle(sur.width, sur.height, blkWidth, blkHeight, bpp, sur.tileMode, sur.alignment, sur.sizeRange, sur.format, sur.data, sur.swizzle);
+            byte[] result = Swizzle.deswizzle(sur.width, sur.height, blkWidth, blkHeight, bpp, sur.tileMode, sur.alignment, sur.sizeRange, sur.format, sur.data, 0);
 
 
             tex.mipmaps.Add(result);
-            tex.width = sur.width;
-            tex.height = sur.height;
+            tex.width = (int)sur.width;
+            tex.height = (int)sur.height;
 
             //File.WriteAllBytes(dataOff.ToString("x") + ".bin" ,data);
 
@@ -213,8 +209,8 @@ namespace BFRES
                     tex.type = PixelInternalFormat.Rgba;
                     tex.utype = OpenTK.Graphics.OpenGL.PixelFormat.Rgba;
                     break;
-                   // default:
-                    //throw new Exception("Unknown format");
+                    default:
+                    throw new Exception("Unknown format");
             }
 
          //   tex.load();

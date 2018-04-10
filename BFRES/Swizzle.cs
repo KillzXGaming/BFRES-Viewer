@@ -25,21 +25,21 @@ namespace BFRES
             public int mipPtr;
             public int tileMode;
             public int swizzle;
-            public int alignment;
+            public uint alignment;
             public int pitch;
-            public int sizeRange;
+            public uint sizeRange;
 
             public byte[] data;
 
             public int[] mipOffset;
 
 
-            public int width
+            public uint width
             {
                 set;
                 get;
             }
-            public int height
+            public uint height
             {
                 set;
                 get;
@@ -92,11 +92,9 @@ namespace BFRES
             ASTC12x12 = 0x3a,
         }
 
-        public static uint blk_dims(uint format, int blkWidth, int blkHeight) //Blk height/width
+        public static uint blk_dims(uint format) //Blk height/width
         {
-            int bit;
-
-
+            uint blkWidth; uint blkHeight;
             if (format == 0x2d) { blkWidth = 4; blkHeight = 4; }
             else if (format == 0x1a) {blkWidth = 4; blkHeight = 4; } 
             else if (format == 0x1b) { blkWidth = 4; blkHeight = 4; }
@@ -120,23 +118,25 @@ namespace BFRES
             else if (format == 0x3a) { blkWidth = 12; blkHeight = 12; }
             else
                 throw new Exception("Unknown format");
-            return format;
+
+            return blkWidth << 4 | blkHeight;
         }
 
-        public static uint bpps(uint format, uint bpp)  //Bytes per pixel
+        public static uint bpps(uint format)  //Bytes per pixel
         {
+            uint bpp;
             if (format == 0x0b ) bpp = 0x04;
-            if (format == 0x1a) bpp = 0x8;
-            if (format == 0x1b) bpp = 0x10;
-            if (format == 0x1c) bpp = 0x10;
-            if (format == 0x1d) bpp = 0x08; 
-            if (format == 0x1e) bpp = 0x08;
-            if (format == 0x1f) bpp = 0x10;
-            if (format == 0x20) bpp = 0x10;
+            else if (format == 0x1a) bpp = 0x8;
+            else if(format == 0x1b) bpp = 0x10;
+            else if(format == 0x1c) bpp = 0x10;
+            else if(format == 0x1d) bpp = 0x08;
+            else if(format == 0x1e) bpp = 0x08;
+            else if(format == 0x1f) bpp = 0x10;
+            else if(format == 0x20) bpp = 0x10;
             else
                 throw new Exception("Unknown format");
-            return format;
-        
+            return bpp;
+        }
 
 
 
@@ -144,50 +144,45 @@ namespace BFRES
          * 
          * Code ported from Aboood's BNTX Extractor https://github.com/aboood40091/BNTX-Extractor/blob/master/swizzle.py
          * 
-         * With help by gdkchan!
-         * 
          *---------------------------------------*/
 
 
-        public static int DIV_ROUND_UP(int n, int d)
+        public static uint DIV_ROUND_UP(uint n, uint d)
         {
             return (n + d - 1) / d;
         }
-        public static int round_up(int x, int y)
+        public static uint round_up(uint x, uint y)
         {
             return ((x - 1) | (y - 1)) + 1;
         }
 
-        public static byte[] _swizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
+        public static byte[] _swizzle(uint width, uint height, uint blkWidth, uint blkHeight, uint bpp, int tileMode, uint alignment, uint size_range, uint format, byte[] data, int toSwizzle)
         {
             GX2Surface sur = new GX2Surface();
-            sur.width = width;
-            sur.height = height;
-            sur.format = format;
-            sur.data = data;
+
             sur.imageSize = data.Length;
 
-            int block_height = 1 << size_range;
+            uint block_height = 1 << size_range;
 
             width = DIV_ROUND_UP(sur.width, blkWidth);
             height = DIV_ROUND_UP(sur.height, blkHeight);
 
-            int pitch;
+            uint pitch;
             if (tileMode == 0)
                 pitch = round_up(width * bpp, alignment * 64);
             else
                 pitch = round_up(width * bpp, 64);
 
-            int surfSize = round_up(pitch * round_up(height, block_height * 8), alignment);
+            uint surfSize = round_up(pitch * round_up(height, block_height * 8), alignment);
 
             byte[] result = new byte[surfSize];
 
-            for (int y = 0; y < width; y++)
+            for (uint y = 0; y < width; y++)
             {
-                for (int x = 0; x < height; x++)
+                for (uint x = 0; x < height; x++)
                 {
-                    int pos;
-                    int pos_;
+                    uint pos;
+                    uint pos_;
 
                     if (tileMode == 0)
                         pos = y * pitch + x * bpp;
@@ -202,12 +197,12 @@ namespace BFRES
             return result;
         }
 
-        public static byte[] deswizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
+        public static byte[] deswizzle(uint width, uint height, uint blkWidth, uint blkHeight, uint bpp, int tileMode, uint alignment, uint size_range, uint format, byte[] data, int toSwizzle)
         {
             return _swizzle(width, height, blkWidth, blkHeight, bpp, tileMode, alignment, size_range, format, data, toSwizzle);
         }
 
-        public static byte[] swizzle(int width, int height, int blkWidth, int blkHeight, int bpp, int tileMode, int alignment, int size_range, uint format, byte[] data, int toSwizzle)
+        public static byte[] swizzle(uint width, uint height, uint blkWidth, uint blkHeight, uint bpp, int tileMode, uint alignment, uint size_range, uint format, byte[] data, int toSwizzle)
         {
             return _swizzle(width, height, blkWidth, blkHeight, bpp, tileMode, alignment, size_range, format, data, toSwizzle);
         }
@@ -215,22 +210,22 @@ namespace BFRES
    
 
 
-        static int getAddrBlockLinear(int x, int y, int width, int bytes_per_pixel, int base_address, int block_height)
+        static uint getAddrBlockLinear(uint x, uint y, uint width, uint bytes_per_pixel, uint base_address, uint block_height)
         {
             /*
               From Tega X1 TRM 
                                */
-            int image_width_in_gobs = DIV_ROUND_UP(width * bytes_per_pixel, 64);
+            uint image_width_in_gobs = DIV_ROUND_UP(width * bytes_per_pixel, 64);
 
 
-            int GOB_address = (base_address
+            uint GOB_address = (base_address
                            + (y / (8 * block_height)) * 512 * block_height * image_width_in_gobs
                            + (x * bytes_per_pixel / 64) * 512 * block_height
                            + (y % (8 * block_height) / 8) * 512);
 
             x *= bytes_per_pixel;
 
-            int Address = (GOB_address + ((x % 64) / 32) * 256 + ((y % 8) / 2) * 64
+            uint Address = (GOB_address + ((x % 64) / 32) * 256 + ((y % 8) / 2) * 64
                + ((x % 32) / 16) * 32 + (y % 2) * 16 + (x % 16));
 
             return Address;
