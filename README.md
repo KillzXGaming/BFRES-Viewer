@@ -1,4 +1,4 @@
-# BFRES-Tool
+# BFRES-Viewer
 A tool to view Switch BFRES files. With more functionally to come soon.
 
 This is a fork of Ploaj's [ModelThingy](https://github.com/Ploaj/ModelThingy) but to work with switch BFRES files. 
