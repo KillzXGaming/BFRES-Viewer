@@ -25,18 +25,9 @@ namespace BFRES
         List<FSHP> shapes = new List<FSHP>();
         public FSKL skel;
 
-        public BaseRenderData ExportModel(int index = 0, int LODindex = 0)
-        {
-            BaseRenderData res = new BaseRenderData();
-            var shape = shapes[index];
-            res.data = vertattr[shape.fvtxindex].VertData;
-            res.PolygonO = shape.lodModels[LODindex].shapeData;
-            return res;
-        }
-
         public FMDL(FileData f)
         {
-            ImageKey = "model"; 
+            ImageKey = "model";
             SelectedImageKey = "model";
 
             f.skip(4); // MAGIC
@@ -134,7 +125,7 @@ namespace BFRES
                 //Textures are disabled atm
 
    
-                /*
+                
                 string tex = mats[shape.fmatIndex].tex[0].Text;
                 // find it in textures
                 foreach (TreeNode n in ((BFRES)Parent.Parent).Nodes)
@@ -160,7 +151,7 @@ namespace BFRES
                         }
                         break;
                     }
-                }*/
+                }
 
 
 
@@ -174,7 +165,6 @@ namespace BFRES
                 GL.VertexAttribPointer(BFRES.shader.getAttribute("_w0"), 4, VertexAttribPointerType.Float, false, BaseRenderData.Vertex.Stride, 48);
                 GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
-  
 
                 // bind attributes
                 //Console.WriteLine(shape.Text + " " + shape.singleBind);
@@ -472,7 +462,7 @@ namespace BFRES
             public float w1 = 1, w2 = 1, w3 = 1, w4 = 1;
         }
 
-        public List<BaseRenderData.Vertex> VertData = new List<BaseRenderData.Vertex>();
+        BaseRenderData t = new BaseRenderData();
 
         public void myRender()
         {
@@ -519,12 +509,6 @@ namespace BFRES
                                     vert.ny = FileData.sign10Bit((normVal >> 10) & 0x3FF) / 511f;
                                     vert.nz = FileData.sign10Bit((normVal >> 20) & 0x3FF) / 511f;
                                     break;
-                                }
-                                else if (att.format.Equals(0x518))
-                                {
-                                    vert.x = d.readFloat();
-                                    vert.y = d.readFloat();
-                                    vert.z = d.readFloat();
                                 }
                                 else
                                     Console.WriteLine("Unkown Format!! " + att.format.ToString() + " " + att.Text);
@@ -637,7 +621,7 @@ namespace BFRES
                         }
                     }
 
-                    VertData.Add(new BaseRenderData.Vertex()
+                    t.data.Add(new BaseRenderData.Vertex()
                     {
                         x = vert.x,
                         y = vert.y,
@@ -670,7 +654,7 @@ namespace BFRES
            
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, gl_vbo);
-            GL.BufferData < BaseRenderData.Vertex >(BufferTarget.ArrayBuffer, (IntPtr)(VertData.Count * BaseRenderData.Vertex.Stride), VertData.ToArray(), BufferUsageHint.StaticDraw);
+            GL.BufferData < BaseRenderData.Vertex >(BufferTarget.ArrayBuffer, (IntPtr)(t.data.Count * BaseRenderData.Vertex.Stride), t.data.ToArray(), BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
 
@@ -779,7 +763,6 @@ namespace BFRES
         public int fvtxOffset;
         public int fmatIndex;
         public List<LODModel> lodModels = new List<LODModel>();
-        public List<BaseRenderData.shape> shapeData = new List<BaseRenderData.shape>();
         public int singleBind;
 
         public FSHP(FileData f)
@@ -824,7 +807,9 @@ namespace BFRES
             }
             Nodes.AddRange(lodModels.ToArray());
 
-            shapeData.Add(new BaseRenderData.shape()
+            BaseRenderData p = new BaseRenderData();
+
+            p.PolygonO.Add(new BaseRenderData.shape()
             {
                 name = Text,
                 Index = index,
@@ -845,7 +830,6 @@ namespace BFRES
         public int faceType, indexBufferOffset, skip;
         public List<int> faces = new List<int>();
         public DrawElementsType type = DrawElementsType.UnsignedShort;
-        public List<BaseRenderData.shape> shapeData = new List<BaseRenderData.shape>();
         public ushort[] data;
         public uint[] dataui;
         public int fcount;
@@ -877,7 +861,9 @@ namespace BFRES
             f.seek(indexBufferOffset);
             data = new ushort[fcount];
             dataui = new uint[fcount];
-            
+
+            BaseRenderData p = new BaseRenderData();
+
             for (int i = 0; i < fcount; i++)
             {
                 if (faceType == 1)
@@ -886,7 +872,7 @@ namespace BFRES
                     //  Console.WriteLine(data[i]);
 
                     //Add to main renderer.
-                    shapeData.Add(new BaseRenderData.shape()
+                    p.PolygonO.Add(new BaseRenderData.shape()
                     {
                         face = data[i],
                     });
