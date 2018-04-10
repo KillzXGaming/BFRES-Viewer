@@ -94,44 +94,49 @@ namespace BFRES
 
         public static uint blk_dims(uint format, int blkWidth, int blkHeight) //Blk height/width
         {
-            if (format == 0x2d) return (format | 4 | 4);
-            else if (format == 0x1a) return (format | 4 | 4);
-            else if (format == 0x1b) return (format | 4 | 4);
-            else if (format == 0x1c) return (format | 4 | 4);
-            else if (format == 0x1e) return (format | 4 | 4);
-            else if (format == 0x1f) return (format | 4 | 4);
-            else if (format == 0x1d) return (format | 4 | 4);
-            else if (format == 0x20) return (format | 4 | 4);
-            else if (format == 0x2e) return (format | 5 | 4);
-            else if (format == 0x2f) return (format | 5 | 5);
-            else if (format == 0x30) return (format | 6 | 6);
-            else if (format == 0x31) return (format | 6 | 6);
-            else if (format == 0x32) return (format | 8 | 5);
-            else if (format == 0x33) return (format | 8 | 6);
-            else if (format == 0x34) return (format | 8 | 8);
-            else if (format == 0x35) return (format | 10 | 5);
-            else if (format == 0x36) return (format | 10 | 6);
-            else if (format == 0x37) return (format | 10 | 8);
-            else if (format == 0x38) return (format | 10 | 10);
-            else if (format == 0x39) return (format | 12 | 10);
-            else if (format == 0x3a) return (format | 12 | 12);
+            int bit;
+
+
+            if (format == 0x2d) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x1a) {blkWidth = 4; blkHeight = 4; } 
+            else if (format == 0x1b) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x1c) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x1e) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x1f) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x1d) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x20) { blkWidth = 4; blkHeight = 4; }
+            else if (format == 0x2e) { blkWidth = 5; blkHeight = 4; }
+            else if (format == 0x2f) { blkWidth = 5; blkHeight = 5; }
+            else if (format == 0x30) { blkWidth = 6; blkHeight = 6; }
+            else if (format == 0x31) { blkWidth = 6; blkHeight = 6; }
+            else if (format == 0x32) { blkWidth = 6; blkHeight = 6; }
+            else if (format == 0x33) { blkWidth = 8; blkHeight = 6; }
+            else if (format == 0x34) { blkWidth = 8; blkHeight = 8; }
+            else if (format == 0x35) { blkWidth = 10; blkHeight = 5; }
+            else if (format == 0x36) { blkWidth = 10; blkHeight = 6; }
+            else if (format == 0x37) { blkWidth = 10; blkHeight = 8; }
+            else if (format == 0x38) { blkWidth = 10; blkHeight = 10; }
+            else if (format == 0x39) { blkWidth = 12; blkHeight = 10; }
+            else if (format == 0x3a) { blkWidth = 12; blkHeight = 12; }
             else
                 throw new Exception("Unknown format");
+            return format;
         }
 
-        public static uint bpps(uint format, int bpp)  //Bytes per pixel
+        public static uint bpps(uint format, uint bpp)  //Bytes per pixel
         {
-            if (format == 0x0b )return (0x04);
-            if (format == 0x1a) return (0x8);
-            if (format == 0x1b) return (0x10);
-            if (format == 0x1c) return (0x10);
-            if (format == 0x1d) return (0x08);
-            if (format == 0x1e) return (0x08);
-            if (format == 0x1f) return (0x10);
-            if (format == 0x20) return (0x10);
+            if (format == 0x0b ) bpp = 0x04;
+            if (format == 0x1a) bpp = 0x8;
+            if (format == 0x1b) bpp = 0x10;
+            if (format == 0x1c) bpp = 0x10;
+            if (format == 0x1d) bpp = 0x08; 
+            if (format == 0x1e) bpp = 0x08;
+            if (format == 0x1f) bpp = 0x10;
+            if (format == 0x20) bpp = 0x10;
             else
                 throw new Exception("Unknown format");
-        }
+            return format;
+        
 
 
 
