@@ -129,7 +129,9 @@ namespace BFRES
         public static byte[] bpps(uint format)  //Bytes per pixel
         {
             if (format == 0x0b)
-                return (new byte[4]);
+                return (new byte[0x04]);
+            if (format == 0x1b)
+                return (new byte[0x10]);
             else
                 throw new Exception("Unknown format");
         }
