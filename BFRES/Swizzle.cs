@@ -117,16 +117,22 @@ namespace BFRES
             else if (format == 0x37)
                 return (10 | 8);
             else if (format == 0x38)
-                return (10 | 10 );
+                return (10 | 10);
             else if (format == 0x39)
                 return (12 | 10);
-            else
+            else if (format == 0x3a)
                 return (12 | 12);
-
+            else
+                throw new Exception("Unknown format");
         }
 
-        public static byte[] bpps;  //Bytes per pixel
-        
+        public static byte[] bpps(uint format)  //Bytes per pixel
+        {
+            if (format == 0x0b)
+                return (new byte[4]);
+            else
+                throw new Exception("Unknown format");
+        }
 
         
 
