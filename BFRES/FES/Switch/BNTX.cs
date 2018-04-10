@@ -148,12 +148,15 @@ namespace BFRES
 
             Console.WriteLine("Texture Size = " + sur.height + " x " + sur.width);
 
-            int blkWidth = 1;  //Test
-            int blkHeight = 1; //Test
+            int blkWidth = 1;
+            int blkHeight = 1;
             int bpp = 1;
 
-            //int bpp = Swizzle.bpps[sur.format >> 8];
+            Console.WriteLine(sur.format);
 
+
+            Swizzle.blk_dims(sur.format >> 8, blkWidth , blkHeight);
+            Swizzle.bpps(sur.format >> 8, bpp);
 
             byte[] result = Swizzle.deswizzle(sur.width, sur.height, blkWidth, blkHeight, bpp, sur.tileMode, sur.alignment, sur.sizeRange, sur.format, sur.data, sur.swizzle);
 

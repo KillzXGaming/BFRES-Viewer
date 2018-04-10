@@ -92,51 +92,48 @@ namespace BFRES
             ASTC12x12 = 0x3a,
         }
 
-        public static uint blk_dims(uint format, uint blkWidth, uint blkHeight) //Blk height/width
+        public static uint blk_dims(uint format, int blkWidth, int blkHeight) //Blk height/width
         {
-            if (format == 0x2d)
-                return (4 | 4);
-            else if (format == 0x2e)
-                return (5 | 4);
-            else if (format == 0x2f)
-                return (5 | 5);
-            else if (format == 0x30)
-                return (6 | 6);
-            else if (format == 0x31)
-                return (6 | 6);
-            else if (format == 0x32)
-                return (8 | 5);
-            else if (format == 0x33)
-                return (8 | 6);
-            else if (format == 0x34)
-                return (8 | 8);
-            else if (format == 0x35)
-                return (10 | 5);
-            else if (format == 0x36)
-                return (10 | 6);
-            else if (format == 0x37)
-                return (10 | 8);
-            else if (format == 0x38)
-                return (10 | 10);
-            else if (format == 0x39)
-                return (12 | 10);
-            else if (format == 0x3a)
-                return (12 | 12);
+            if (format == 0x2d) return (4 | 4);
+            else if (format == 0x1a) return (4 | 4);
+            else if (format == 0x1b) return (4 | 4);
+            else if (format == 0x1c) return (4 | 4);
+            else if (format == 0x1e) return (4 | 4);
+            else if (format == 0x1f) return (4 | 4);
+            else if (format == 0x1d) return (4 | 4);
+            else if (format == 0x20) return (4 | 4);
+            else if (format == 0x2e) return (5 | 4);
+            else if (format == 0x2f) return (5 | 5);
+            else if (format == 0x30) return (6 | 6);
+            else if (format == 0x31) return (6 | 6);
+            else if (format == 0x32) return (8 | 5);
+            else if (format == 0x33) return (8 | 6);
+            else if (format == 0x34) return (8 | 8);
+            else if (format == 0x35) return (10 | 5);
+            else if (format == 0x36) return (10 | 6);
+            else if (format == 0x37) return (10 | 8);
+            else if (format == 0x38) return (10 | 10);
+            else if (format == 0x39) return (12 | 10);
+            else if (format == 0x3a) return (12 | 12);
             else
                 throw new Exception("Unknown format");
         }
 
-        public static byte[] bpps(uint format)  //Bytes per pixel
+        public static uint bpps(uint format, int bpp)  //Bytes per pixel
         {
-            if (format == 0x0b)
-                return (new byte[0x04]);
-            if (format == 0x1b)
-                return (new byte[0x10]);
+            if (format == 0x0b )return (0x04);
+            if (format == 0x1a) return (0x8);
+            if (format == 0x1b) return (0x10);
+            if (format == 0x1c) return (0x10);
+            if (format == 0x1d) return (0x08);
+            if (format == 0x1e) return (0x08);
+            if (format == 0x1f) return (0x10);
+            if (format == 0x20) return (0x10);
             else
                 throw new Exception("Unknown format");
         }
 
-        
+
 
         /*---------------------------------------
          * 
