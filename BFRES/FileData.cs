@@ -239,6 +239,9 @@ namespace BFRES
 
         public byte[] getSection(int offset, int size)
         {
+            if (offset == 0 && size == -1)
+                return b;
+
             if (size == -1)
                 size = b.Length - offset;
             byte[] by = new byte[size];
