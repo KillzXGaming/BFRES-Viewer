@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,28 @@ namespace BFRES
                 default:
                     return data.Length;
             }
+        }
+
+        public unsafe void ExportAsImage(string path)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+            System.Drawing.Imaging.BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            GL.BindTexture(TextureTarget.Texture2D, id);
+            GL.GetTexImage(TextureTarget.Texture2D, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+
+           /* Int32* ptr = (Int32*)bitmapData.Scan0.ToPointer();
+            byte[] imagePixels = (mipmaps[0]);
+            fixed (byte* pixels = imagePixels)
+            {
+                Int32* pixelsInt = (Int32*)pixels;
+                for (int i = 0; i < imagePixels.Length / 4; i++)
+                {
+                    ptr[i] = (pixelsInt[i] >> 8) | ((pixelsInt[i] << 24) & 0xFF); //rgbA to Argb
+                }
+            }*/
+
+            bitmap.UnlockBits(bitmapData);
+            bitmap.Save(path);
         }
     }
 }

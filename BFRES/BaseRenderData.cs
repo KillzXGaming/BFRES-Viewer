@@ -9,10 +9,10 @@ namespace BFRES
 {
     public class BaseRenderData
     {
-        
-
         public List<Vertex> data = new List<Vertex>();
         public List<shape> PolygonO = new List<shape>();
+        public List<FMAT> mats = new List<FMAT>();
+        public List<BRTI> textures = new List<BRTI>();
 
         public class shape
         {
@@ -31,7 +31,29 @@ namespace BFRES
             public float i1, i2, i3, i4; // can have 5
             public float w1, w2, w3, w4;
             public const int Stride = 4 * 16;
+
+            public Vector3h NormalVec
+            {
+                get { return new Vector3h(nx, ny, nz); }
+            }
+
+            public Vector3h Vec
+            {
+                get { return new Vector3h(x, y, z); }
+            }
         }
 
+        public void Join(BaseRenderData rnd)
+        {
+            var datalen = data.Count;
+            var polyLen = PolygonO.Count;
+
+            data.AddRange(rnd.data);
+            PolygonO.AddRange(rnd.PolygonO);
+            for (int i = polyLen; i < PolygonO.Count; i++)
+            {
+                PolygonO[i].face += datalen; //offset
+            }
+        }
     }
 }
