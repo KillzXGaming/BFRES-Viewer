@@ -108,7 +108,7 @@ namespace BFRES
             if (treeView1.SelectedNode is BRTI)
             {
 
-                Swizzle.GX2Surface Tex = new Swizzle.GX2Surface();
+                Swizzle.Surface Tex = new Swizzle.Surface();
 
                 propertyGrid1.Visible = true;
 
