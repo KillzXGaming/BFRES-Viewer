@@ -65,12 +65,17 @@ namespace BFRES
             height = DIV_ROUND_UP(height, blkHeight);
 
             uint pitch;
+            uint surfSize;
             if (tileMode == 0)
-                pitch = round_up(width * bpp, alignment * 64);
+            {
+                pitch = round_up(width * bpp, 32);
+                surfSize = round_up(pitch * height, alignment);
+            }
             else
+            {
                 pitch = round_up(width * bpp, 64);
-
-            uint surfSize = round_up(pitch * round_up(height, block_height * 8), alignment);
+                surfSize = round_up(pitch * round_up(height, block_height * 8), alignment);
+            }
 
             byte[] result = new byte[surfSize];
 
