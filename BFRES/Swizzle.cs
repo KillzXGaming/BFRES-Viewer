@@ -68,7 +68,7 @@ namespace BFRES
             uint surfSize;
             if (tileMode == 0)
             {
-                pitch = round_up(width * bpp, 32);
+                pitch = width * bpp;
                 surfSize = round_up(pitch * height, alignment);
             }
             else
